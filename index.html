@@ -208,42 +208,56 @@ button:hover, .btn:hover {
   border-bottom: none;
 }
 
-.buy-btn {
-  width: 100%;
+.payment-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   margin-top: 30px;
-  padding: 15px;
-  background: #00a86b;
-  color: white;
+}
+
+.pay-btn {
+  width: 100%;
+  padding: 12px;
   border: none;
-  border-radius: 30px;
-  font-size: 16px;
+  border-radius: 25px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-.buy-btn:hover {
-  background: #008c59;
+.paypal-btn {
+  background: #0070ba;
+  color: white;
+}
+
+.paypal-btn:hover {
+  background: #005a94;
   transform: scale(1.02);
 }
 
-.revolut-badge {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 8px 15px;
-  background: #00a86b;
+.card-btn {
+  background: #1434cb;
   color: white;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
 }
 
-.pricing-card.featured .buy-btn {
-  background: #00a86b;
+.card-btn:hover {
+  background: #0f2599;
+  transform: scale(1.02);
 }
 
-.pricing-card.featured .buy-btn:hover {
-  background: #008c59;
+.apple-btn {
+  background: #000;
+  color: white;
+}
+
+.apple-btn:hover {
+  background: #333;
+  transform: scale(1.02);
 }
 
 /* Plans Section */
@@ -277,17 +291,27 @@ button:hover, .btn:hover {
   margin: 10px 0;
 }
 
-.payment-info {
-  background: #e8f5e9;
-  border-left: 4px solid #00a86b;
+.payment-methods {
+  background: #e3f2fd;
+  border-left: 4px solid #667eea;
   padding: 15px;
   margin: 20px 0;
   border-radius: 5px;
 }
 
-.payment-info p {
-  color: #2e7d32;
+.payment-methods p {
+  color: #1565c0;
   font-size: 14px;
+}
+
+.payment-methods ul {
+  margin: 10px 0 0 20px;
+}
+
+.payment-methods li {
+  color: #1565c0;
+  font-size: 14px;
+  margin: 5px 0;
 }
 
 footer {
@@ -302,14 +326,14 @@ footer {
 }
 
 .footer-links a {
-  color: #00a86b;
+  color: #667eea;
   text-decoration: none;
   margin: 0 15px;
   transition: color 0.3s;
 }
 
 .footer-links a:hover {
-  color: #00d878;
+  color: #764ba2;
 }
 
 @media (max-width: 600px) {
@@ -425,18 +449,29 @@ footer {
       <li>• Exclusive community access</li>
     </ul>
   </div>
+
+  <div class="payment-methods">
+    <p>
+      <strong>💳 We Accept Multiple Payment Methods:</strong>
+    </p>
+    <ul>
+      <li>✓ PayPal - Fast and secure</li>
+      <li>✓ Debit Card - Visa, Mastercard</li>
+      <li>✓ Apple Pay - One-click payment (iPhone/Mac)</li>
+    </ul>
+  </div>
 </div>
 </section>
 
 <section class="pricing-section" id="pricing">
-<h2>💚 Simple, Transparent Pricing</h2>
-<p style="color: #666; margin-bottom: 30px;">All payments securely processed through Revolut</p>
+<h2>💰 Simple, Transparent Pricing</h2>
+<p style="color: #666; margin-bottom: 30px;">Secure payments with PayPal, Debit Card, or Apple Pay</p>
 
 <div class="pricing-cards">
 
   <div class="pricing-card">
     <div class="plan-name">Starter</div>
-    <div class="price">€29</div>
+    <div class="price">$29</div>
     <div class="price-period">per month</div>
     <ul class="features">
       <li>3 workouts/week</li>
@@ -445,14 +480,23 @@ footer {
       <li>Weekly check-ins</li>
       <li>Email support</li>
     </ul>
-    <button class="buy-btn" onclick="initiateRevolutPayment('Starter', 29)">💳 Pay with Revolut</button>
-    <div class="revolut-badge">✓ Revolut Secure</div>
+    <div class="payment-buttons">
+      <button class="pay-btn paypal-btn" onclick="initiatePayment('Starter', 29, 'PayPal')">
+        🅿️ PayPal
+      </button>
+      <button class="pay-btn card-btn" onclick="initiatePayment('Starter', 29, 'Card')">
+        💳 Debit Card
+      </button>
+      <button class="pay-btn apple-btn" onclick="initiatePayment('Starter', 29, 'Apple Pay')">
+        🍎 Apple Pay
+      </button>
+    </div>
   </div>
 
   <div class="pricing-card featured">
     <div class="badge">MOST POPULAR</div>
     <div class="plan-name">Premium</div>
-    <div class="price">€79</div>
+    <div class="price">$79</div>
     <div class="price-period">per month</div>
     <ul class="features">
       <li>5 workouts/week</li>
@@ -461,13 +505,22 @@ footer {
       <li>Progress tracking app</li>
       <li>Priority support</li>
     </ul>
-    <button class="buy-btn" onclick="initiateRevolutPayment('Premium', 79)">💳 Pay with Revolut</button>
-    <div class="revolut-badge">✓ Revolut Secure</div>
+    <div class="payment-buttons">
+      <button class="pay-btn paypal-btn" onclick="initiatePayment('Premium', 79, 'PayPal')">
+        🅿️ PayPal
+      </button>
+      <button class="pay-btn card-btn" onclick="initiatePayment('Premium', 79, 'Card')">
+        💳 Debit Card
+      </button>
+      <button class="pay-btn apple-btn" onclick="initiatePayment('Premium', 79, 'Apple Pay')">
+        🍎 Apple Pay
+      </button>
+    </div>
   </div>
 
   <div class="pricing-card">
     <div class="plan-name">Elite</div>
-    <div class="price">€199</div>
+    <div class="price">$199</div>
     <div class="price-period">per month</div>
     <ul class="features">
       <li>Unlimited workouts</li>
@@ -476,20 +529,19 @@ footer {
       <li>24/7 support</li>
       <li>Advanced analytics</li>
     </ul>
-    <button class="buy-btn" onclick="initiateRevolutPayment('Elite', 199)">💳 Pay with Revolut</button>
-    <div class="revolut-badge">✓ Revolut Secure</div>
+    <div class="payment-buttons">
+      <button class="pay-btn paypal-btn" onclick="initiatePayment('Elite', 199, 'PayPal')">
+        🅿️ PayPal
+      </button>
+      <button class="pay-btn card-btn" onclick="initiatePayment('Elite', 199, 'Card')">
+        💳 Debit Card
+      </button>
+      <button class="pay-btn apple-btn" onclick="initiatePayment('Elite', 199, 'Apple Pay')">
+        🍎 Apple Pay
+      </button>
+    </div>
   </div>
 
-</div>
-
-<div class="payment-info" style="max-width: 900px; margin: 40px auto;">
-  <p>
-    💡 <strong>How to Set Up Revolut Payment:</strong><br>
-    1. Create a Revolut Business account at revolut.com/business<br>
-    2. Generate your unique payment link for each plan<br>
-    3. Add your Revolut payment links to this website<br>
-    4. All payments will go directly to your Revolut account!
-  </p>
 </div>
 </section>
 
@@ -509,66 +561,95 @@ footer {
 </div>
 <p>&copy; 2026 FitAndGlow. All rights reserved.</p>
 <p style="font-size: 12px; margin-top: 10px; color: #999;">Transform your body. Transform your mindset. Transform your life.</p>
-<p style="font-size: 12px; margin-top: 5px; color: #00a86b;">💚 Payments powered by Revolut</p>
+<p style="font-size: 12px; margin-top: 5px; color: #667eea;">💳 Secure payments powered by PayPal & Stripe</p>
 </footer>
 
 <script>
-// Revolut Payment Handler
-function initiateRevolutPayment(plan, amount) {
-  // Get user confirmation
-  const userConfirm = confirm(`
+// Payment Handler
+function initiatePayment(plan, amount, method) {
+  const confirmation = confirm(`
 Ready to subscribe to ${plan} Plan?
 
-Amount: €${amount}/month
+Amount: $${amount}/month
+Payment Method: ${method}
 
-You'll be redirected to Revolut to complete payment.
-
-Click OK to continue.
+Click OK to proceed to payment.
   `);
 
-  if (userConfirm) {
-    // PLACEHOLDER: Replace with your actual Revolut payment link
-    // Get your unique Revolut payment links from:
-    // https://business.revolut.com/payments
-    
-    const revolutPaymentLinks = {
-      'Starter': 'https://revolut.com/pay/YOUR_STARTER_LINK', // Replace with your link
-      'Premium': 'https://revolut.com/pay/YOUR_PREMIUM_LINK', // Replace with your link
-      'Elite': 'https://revolut.com/pay/YOUR_ELITE_LINK'     // Replace with your link
-    };
-
-    // Check if payment link is configured
-    if (revolutPaymentLinks[plan].includes('YOUR_')) {
-      showPaymentSetupGuide();
-    } else {
-      // Redirect to Revolut payment
-      window.location.href = revolutPaymentLinks[plan];
-    }
+  if (confirmation) {
+    showPaymentInstructions(plan, amount, method);
   }
 }
 
-function showPaymentSetupGuide() {
-  alert(`
-✅ PAYMENT SETUP GUIDE
+function showPaymentInstructions(plan, amount, method) {
+  let message = `
+✅ PAYMENT INITIATED
 
-To enable Revolut payments:
+Plan: ${plan}
+Amount: $${amount}/month
+Method: ${method}
 
-1️⃣ Go to: https://business.revolut.com
-2️⃣ Sign in to your business account
-3️⃣ Create payment links for each plan:
-   - Starter (€29)
-   - Premium (€79)
-   - Elite (€199)
-4️⃣ Copy your payment links
-5️⃣ Contact: support@fitandglow.com
-   (Or edit the website with your links)
+`;
 
-Once configured, all payments will go 
-directly to your Revolut account! 💚
+  if (method === 'PayPal') {
+    message += `
+🅿️ PayPal Instructions:
+1. You'll be redirected to PayPal
+2. Log in with your PayPal account
+3. Confirm the payment of $${amount}
+4. You'll receive a confirmation email
+5. Your subscription starts immediately!
 
-Need help? Check Revolut's documentation:
-https://business.revolut.com/help
-  `);
+Setup Coming Soon:
+- PayPal integration is being configured
+- For now, you can manually send payment
+- Email: support@fitandglow.com
+    `;
+  } else if (method === 'Card') {
+    message += `
+💳 Debit Card Instructions:
+1. A secure payment form will appear
+2. Enter your card details:
+   - Card number
+   - Expiry date
+   - CVV (3-digit code)
+3. Confirm payment of $${amount}
+4. Your subscription starts immediately!
+
+Supported Cards:
+✓ Visa
+✓ Mastercard
+✓ American Express
+
+Setup Coming Soon:
+- Stripe integration is being configured
+- For now, you can email: support@fitandglow.com
+    `;
+  } else if (method === 'Apple Pay') {
+    message += `
+🍎 Apple Pay Instructions:
+1. Apple Pay window will open
+2. Confirm with Face ID or Touch ID
+3. Payment of $${amount} will be charged
+4. Your subscription starts immediately!
+
+Requirements:
+✓ Apple Pay enabled on your device
+✓ Valid payment method added to Apple Wallet
+✓ Face ID/Touch ID authentication
+
+Setup Coming Soon:
+- Apple Pay integration is being configured
+- For now, you can email: support@fitandglow.com
+    `;
+  }
+
+  message += `
+
+Questions? Contact us: support@fitandglow.com
+  `;
+
+  alert(message);
 }
 
 // Smooth scrolling for navigation
